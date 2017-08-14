@@ -5,6 +5,8 @@ This project is made to be a library which you can instantly include into your p
  Because of that it might not always be up to date.
  
 Check releases section for .aar files of the libmupdf module.
+
+For the sake of keeping apps small i recommend compiling it for different cpu architectures.
  
 Feel free to contribute.
 

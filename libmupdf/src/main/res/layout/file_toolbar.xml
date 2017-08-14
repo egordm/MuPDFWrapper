@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<merge xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <HorizontalScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/toolbar">
+
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/toolbar"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp">
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:scaleType="fitXY"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:textColor="@color/black"
+                android:textSize="11sp"
+                android:textAllCaps="true"
+                android:background="@drawable/toolbar_button"
+                android:id="@+id/save_button"
+                android:drawableTop="@drawable/icon_save"
+                android:text="@string/save_button" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:scaleType="fitXY"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:textColor="@color/black"
+                android:textSize="11sp"
+                android:textAllCaps="true"
+                android:background="@drawable/toolbar_button"
+                android:id="@+id/save_as_button"
+                android:drawableTop="@drawable/icon_save_as"
+                android:text="@string/save_as_button" />
+
+            <!--a divider-->
+            <View
+                android:layout_width="1dp"
+                android:paddingRight="3dp" android:paddingLeft="3dp"
+                android:layout_height="match_parent"
+                android:background="#FF8E8F90" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:scaleType="fitXY"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:textColor="@color/black"
+                android:textSize="11sp"
+                android:textAllCaps="true"
+                android:background="@drawable/toolbar_button"
+                android:id="@+id/print_button"
+                android:drawableTop="@drawable/icon_print"
+                android:text="@string/print_button" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:scaleType="fitXY"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:textColor="@color/black"
+                android:textSize="11sp"
+                android:textAllCaps="true"
+                android:background="@drawable/toolbar_button"
+                android:id="@+id/share_button"
+                android:drawableTop="@drawable/icon_share"
+                android:text="@string/share_button" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:scaleType="fitXY"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:textColor="@color/black"
+                android:textSize="11sp"
+                android:textAllCaps="true"
+                android:background="@drawable/toolbar_button"
+                android:id="@+id/open_in_button"
+                android:drawableTop="@drawable/icon_open_in"
+                android:text="@string/open_in_button" />
+
+            <!--a divider-->
+            <View
+                android:layout_width="1dp"
+                android:paddingRight="3dp" android:paddingLeft="3dp"
+                android:layout_height="match_parent"
+                android:background="#FF8E8F90" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:scaleType="fitXY"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:textColor="@color/black"
+                android:textSize="11sp"
+                android:textAllCaps="true"
+                android:background="@drawable/toolbar_button"
+                android:id="@+id/proof_button"
+                android:drawableTop="@drawable/icon_proof"
+                android:text="@string/proof_button" />
+
+        </LinearLayout>
+
+    </HorizontalScrollView>
+
+</merge>

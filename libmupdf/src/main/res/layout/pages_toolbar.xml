@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<merge xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <HorizontalScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/toolbar">
+
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/toolbar"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp">
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:scaleType="fitXY"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:textColor="@color/black"
+                android:textSize="11sp"
+                android:textAllCaps="true"
+                android:background="@drawable/toolbar_button"
+                android:id="@+id/first_page_button"
+                android:drawableTop="@drawable/icon_first_page"
+                android:text="@string/first_page_button" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:scaleType="fitXY"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:textColor="@color/black"
+                android:textSize="11sp"
+                android:textAllCaps="true"
+                android:background="@drawable/toolbar_button"
+                android:id="@+id/last_page_button"
+                android:drawableTop="@drawable/icon_last_page"
+                android:text="@string/last_page_button" />
+
+            <!--a divider-->
+            <View
+                android:layout_width="1dp"
+                android:paddingRight="8dp"
+                android:paddingLeft="8dp"
+                android:layout_height="match_parent"
+                android:background="#FF8E8F90" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:scaleType="fitXY"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:textColor="@color/black"
+                android:textSize="11sp"
+                android:textAllCaps="true"
+                android:background="@drawable/toolbar_button"
+                android:id="@+id/reflow_button"
+                android:drawableTop="@drawable/icon_reflow"
+                android:text="@string/reflow_button" />
+
+        </LinearLayout>
+
+    </HorizontalScrollView>
+
+</merge>

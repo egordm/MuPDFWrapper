@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<merge xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <HorizontalScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/toolbar">
+
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/toolbar"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp">
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:scaleType="fitXY"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:textColor="@color/black"
+                android:textSize="11sp"
+                android:textAllCaps="true"
+                android:background="@drawable/toolbar_button"
+                android:id="@+id/highlight_button"
+                android:drawableTop="@drawable/icon_highlight"
+                android:text="@string/highlight_button" />
+
+            <!--a divider-->
+            <View
+                android:layout_width="1dp"
+                android:paddingRight="3dp" android:paddingLeft="3dp"
+                android:layout_height="match_parent"
+                android:background="#FF8E8F90" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:id="@+id/draw_tools_holder"
+                android:background="@drawable/toolbar_button2"
+                >
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:scaleType="fitXY"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:textColor="@color/black"
+                    android:textSize="11sp"
+                    android:textAllCaps="true"
+                    android:background="@drawable/toolbar_button"
+                    android:id="@+id/draw_button"
+                    android:drawableTop="@drawable/icon_draw"
+                    android:text="@string/draw_button" />
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:scaleType="fitXY"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:textColor="@color/black"
+                    android:textSize="11sp"
+                    android:textAllCaps="true"
+                    android:background="@drawable/toolbar_button"
+                    android:id="@+id/line_color_button"
+                    android:drawableTop="@drawable/icon_line_color"
+                    android:text="" />
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:scaleType="fitXY"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:textColor="@color/black"
+                    android:textSize="11sp"
+                    android:textAllCaps="true"
+                    android:background="@drawable/toolbar_button"
+                    android:id="@+id/line_thickness_button"
+                    android:drawableTop="@drawable/icon_line_thickness"
+                    android:text="" />
+
+            </LinearLayout>
+
+            <!--a divider-->
+            <View
+                android:layout_width="1dp"
+                android:paddingRight="3dp"
+                android:paddingLeft="3dp"
+                android:layout_height="match_parent"
+                android:background="#FF8E8F90" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:id="@+id/note_holder"
+                android:background="@drawable/toolbar_button2"
+                >
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:scaleType="fitXY"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:textColor="@color/black"
+                    android:textSize="11sp"
+                    android:textAllCaps="true"
+                    android:background="@drawable/toolbar_button"
+                    android:id="@+id/note_button"
+                    android:drawableTop="@drawable/icon_note"
+                    android:text="@string/note_button" />
+
+            </LinearLayout>
+
+
+            <!--a divider-->
+            <View
+                android:layout_width="1dp"
+                android:paddingRight="3dp" android:paddingLeft="3dp"
+                android:layout_height="match_parent"
+                android:background="#FF8E8F90" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:scaleType="fitXY"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:textColor="@color/black"
+                android:textSize="11sp"
+                android:textAllCaps="true"
+                android:background="@drawable/toolbar_button"
+                android:id="@+id/delete_button"
+                android:drawableTop="@drawable/icon_delete"
+                android:text="@string/delete_button" />
+
+            <!--
+                this layout holds some buttons for testing
+                normally it's not shown.
+            -->
+
+            <LinearLayout
+                android:visibility="visible"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <!--a divider-->
+                <View
+                    android:layout_width="1dp"
+                    android:paddingRight="3dp" android:paddingLeft="3dp"
+                    android:layout_height="match_parent"
+                    android:background="#FF8E8F90" />
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:scaleType="fitXY"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:textColor="@color/black"
+                    android:textSize="11sp"
+                    android:textAllCaps="true"
+                    android:background="@drawable/toolbar_button"
+                    android:id="@+id/show_annot_button"
+                    android:drawableTop="@drawable/icon_toggle_annotations"
+                    android:text="@string/toggle_button" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </HorizontalScrollView>
+
+</merge>

@@ -2,4 +2,17 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
 	android:layout_width="match_parent"
 	android:layout_height="match_parent">
+
+	<RelativeLayout
+		android:id="@+id/doc_wrapper"
+		android:layout_width="match_parent"
+		android:layout_height="match_parent">
+
+		<net.egordmitriev.libmupdf.PDFView
+			android:id="@+id/doc_view_inner"
+			android:layout_width="match_parent"
+			android:layout_height="match_parent">
+		</net.egordmitriev.libmupdf.PDFView>
+
+	</RelativeLayout>
 </RelativeLayout>

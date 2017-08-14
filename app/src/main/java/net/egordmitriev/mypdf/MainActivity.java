@@ -1,14 +1,16 @@
 package net.egordmitriev.mypdf;
 
 import android.content.Context;
-import android.content.Intent;
 import android.content.res.AssetManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.widget.RelativeLayout;
 
-import com.artifex.mupdf.example.DocViewActivity;
+import com.artifex.mupdf.fitz.Document;
+
+import net.egordmitriev.libmupdf.PDFView;
 
 import java.io.File;
 import java.io.IOException;
@@ -17,16 +19,23 @@ import java.io.OutputStream;
 
 public class MainActivity extends AppCompatActivity {
 	
+	private PDFView mDocView;
+	private Document mDoc;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_main);
 		
 		Uri pdf = openPDF();
-		Intent intent;
-		intent = new Intent(this, DocViewActivity.class);
-		intent.setAction(Intent.ACTION_VIEW);
-		intent.setData(pdf);
-		startActivity(intent);
+		final String path = Uri.decode(pdf.getEncodedPath());
+		
+		mDocView = (PDFView) findViewById(R.id.doc_view_inner);
+		RelativeLayout layout = (RelativeLayout) findViewById(R.id.doc_wrapper);
+		mDocView.setupHandles(layout);
+		
+		mDoc = Document.openDocument(path);
+		mDocView.setDocument(mDoc);
 		
 	}
 	
@@ -60,4 +69,16 @@ public class MainActivity extends AppCompatActivity {
 		return Uri.parse("file://" + getFilesDir() + "/git-cs.pdf");
 	}
 	
+	@Override
+	public void finish()
+	{
+		//  stop the view
+		mDocView.finish();
+		super.finish();
+	}
+	
+	@Override
+	protected void onDestroy() {
+		super.onDestroy();
+	}
 }

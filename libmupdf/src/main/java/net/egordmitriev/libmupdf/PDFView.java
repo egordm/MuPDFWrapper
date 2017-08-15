@@ -45,6 +45,8 @@ public class PDFView extends PDFViewBase implements DragHandleListener {
 	private com.artifex.mupdf.fitz.Rect mSearchRects[] = null;
 	//  index into the array
 	private int mSearchIndex = -1;
+	// position of search result relative to window in percent
+	private float mSearchScrollPos = 0.5f;
 	
 	public PDFView(Context context) {
 		super(context);
@@ -456,7 +458,7 @@ public class PDFView extends PDFViewBase implements DragHandleListener {
 		if (doSearch(-1, mSearchPage)) {
 			DocPageView dpv = (DocPageView) getOrCreateChild(mSearchPage);
 			dpv.setSearchHighlight(mSearchRects[mSearchIndex]);
-			scrollRectIntoView(mSearchPage, mSearchRects[mSearchIndex]);
+			focusOnRect(mSearchPage, mSearchRects[mSearchIndex]);
 		}
 	}
 	
@@ -516,13 +518,9 @@ public class PDFView extends PDFViewBase implements DragHandleListener {
 		return doSearch(direction, startPage);
 	}
 	
-	
 	protected static final float SEARCH_SCALE = 1.8f;
 	
 	public void focusOnRect(int pageNum, com.artifex.mupdf.fitz.Rect box) {
-		Rect viewport = new Rect();
-		getGlobalVisibleRect(viewport);
-		
 		setScale(SEARCH_SCALE);
 		scrollRectIntoView(pageNum, box);
 	}
@@ -538,9 +536,9 @@ public class PDFView extends PDFViewBase implements DragHandleListener {
 		Point point = cv.pageToView((int) box.x0, (int) box.y1);
 		Rect childRect = cv.getChildRect();
 		
-		int newX = getScrollX() - (childRect.left + point.x) + viewport.width()/2;
-		int newY = getScrollY() - (childRect.top + point.y) + viewport.height()/2;
-		if(newX != 0 || newY != 0) {
+		int newX = (int) (getScrollX() - (childRect.left + point.x) + viewport.width() * mSearchScrollPos);
+		int newY = (int) (getScrollY() - (childRect.top + point.y) + viewport.height() * mSearchScrollPos);
+		if (newX != 0 || newY != 0) {
 			smoothScrollBy(newX, newY);
 		}
 	}
@@ -575,6 +573,14 @@ public class PDFView extends PDFViewBase implements DragHandleListener {
 		if (hasSelection()) {
 			Toast.makeText(getContext(), "onHighlight", Toast.LENGTH_SHORT).show();
 		}
+	}
+	
+	public float getSearchScrollPos() {
+		return mSearchScrollPos;
+	}
+	
+	public void setSearchScrollPos(float searchScrollPos) {
+		mSearchScrollPos = searchScrollPos;
 	}
 	
 	private boolean mNoteMode = false;

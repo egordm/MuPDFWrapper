@@ -445,6 +445,7 @@ public class PDFView extends PDFViewBase implements DragHandleListener {
 			DocPageView dpv = (DocPageView) getOrCreateChild(mSearchPage);
 			dpv.setSearchHighlight(mSearchRects[mSearchIndex]);
 			scrollRectIntoView(mSearchPage, mSearchRects[mSearchIndex]);
+			setScale(2.0f, Utils.getCentre(mSearchRects[mSearchIndex]));
 		}
 	}
 	
@@ -526,13 +527,23 @@ public class PDFView extends PDFViewBase implements DragHandleListener {
 		DocPageView cv = (DocPageView) getOrCreateChild(pageNum);
 		Point point = cv.pageToView((int) box.x0, (int) box.y1);
 		Rect childRect = cv.getChildRect();
-		point.y += childRect.top;
-		point.y -= getScrollY();
+		point.x += childRect.left - getScrollX();
+		point.y += childRect.top - getScrollY();
+		
+		int diffX = 0;
+		int diffY = 0;
 		
 		//  if the point is outside the viewport, scroll so it is.
+		if (point.x < viewport.left || point.x >= viewport.right) {
+			diffX = (viewport.left + viewport.right) / 2 - point.x;
+		}
+		
 		if (point.y < viewport.top || point.y >= viewport.bottom) {
-			int diff = (viewport.top + viewport.bottom) / 2 - point.y;
-			smoothScrollBy(0, diff);
+			diffY = (viewport.top + viewport.bottom) / 2 - point.y;
+		}
+		
+		if(diffX != 0 || diffY != 0) {
+			smoothScrollBy(diffX, diffY);
 		}
 	}
 	

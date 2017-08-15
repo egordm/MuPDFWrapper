@@ -39,8 +39,8 @@ public class PDFViewBase extends AdapterView<Adapter>
 	
 	private static final int UNSCALED_GAP = 20;
 	
-	private static final float MIN_SCALE = .15f;
-	private static final float MAX_SCALE = 5.0f;
+	protected static final float MIN_SCALE = .15f;
+	protected static final float MAX_SCALE = 5.0f;
 	
 	private PageAdapter mAdapter;
 	private boolean mFinished = false;
@@ -276,8 +276,14 @@ public class PDFViewBase extends AdapterView<Adapter>
 		return true;
 	}
 	
+	public float getScale() {
+		return mScale;
+	}
+	
 	public void setScale(float val) {
 		mScale = val;
+		scaleChildren();
+		requestLayout();
 	}
 	
 	public void onLongPress(MotionEvent e) {
@@ -402,6 +408,8 @@ public class PDFViewBase extends AdapterView<Adapter>
 			cv.setNewScale(mScale);
 		}
 	}
+	
+	
 	
 	public boolean onScale(ScaleGestureDetector detector) {
 		//  new scale factor
@@ -581,8 +589,6 @@ public class PDFViewBase extends AdapterView<Adapter>
 			childLeft = column * (unscaledMaxw + UNSCALED_GAP);
 			childRight = childLeft + childWidth;
 			childBottom = childTop + childHeight;
-			
-			// Log.d("HELLOWORLD", i+"PREPAGE rect" + childTop + " bottom " + childBottom);
 			
 			//  scale those results to get the actual page location.
 			int scaledChildLeft = (int) (childLeft * mScale);

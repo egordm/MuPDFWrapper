@@ -444,8 +444,8 @@ public class PDFView extends PDFViewBase implements DragHandleListener {
 		if (doSearch(1, mSearchPage)) {
 			DocPageView dpv = (DocPageView) getOrCreateChild(mSearchPage);
 			dpv.setSearchHighlight(mSearchRects[mSearchIndex]);
-			scrollRectIntoView(mSearchPage, mSearchRects[mSearchIndex]);
-			setScale(2.0f, Utils.getCentre(mSearchRects[mSearchIndex]));
+			focusOnRect(mSearchPage, mSearchRects[mSearchIndex]);
+			
 		}
 	}
 	
@@ -516,34 +516,32 @@ public class PDFView extends PDFViewBase implements DragHandleListener {
 		return doSearch(direction, startPage);
 	}
 	
+	
+	protected static final float SEARCH_SCALE = 1.8f;
+	
+	public void focusOnRect(int pageNum, com.artifex.mupdf.fitz.Rect box) {
+		Rect viewport = new Rect();
+		getGlobalVisibleRect(viewport);
+		
+		setScale(SEARCH_SCALE);
+		scrollRectIntoView(pageNum, box);
+	}
+	
 	public void scrollRectIntoView(int pageNum, com.artifex.mupdf.fitz.Rect box) {
 		//  get our viewport
 		Rect viewport = new Rect();
 		getGlobalVisibleRect(viewport);
-		viewport.offset(0, -viewport.top);
 		
 		//  get the location of the box's lower left corner,
 		//  relative to the viewport
 		DocPageView cv = (DocPageView) getOrCreateChild(pageNum);
 		Point point = cv.pageToView((int) box.x0, (int) box.y1);
 		Rect childRect = cv.getChildRect();
-		point.x += childRect.left - getScrollX();
-		point.y += childRect.top - getScrollY();
 		
-		int diffX = 0;
-		int diffY = 0;
-		
-		//  if the point is outside the viewport, scroll so it is.
-		if (point.x < viewport.left || point.x >= viewport.right) {
-			diffX = (viewport.left + viewport.right) / 2 - point.x;
-		}
-		
-		if (point.y < viewport.top || point.y >= viewport.bottom) {
-			diffY = (viewport.top + viewport.bottom) / 2 - point.y;
-		}
-		
-		if(diffX != 0 || diffY != 0) {
-			smoothScrollBy(diffX, diffY);
+		int newX = getScrollX() - (childRect.left + point.x) + viewport.width()/2;
+		int newY = getScrollY() - (childRect.top + point.y) + viewport.height()/2;
+		if(newX != 0 || newY != 0) {
+			smoothScrollBy(newX, newY);
 		}
 	}
 	

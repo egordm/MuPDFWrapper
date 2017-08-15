@@ -1,18 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	android:layout_width="match_parent"
-	android:layout_height="match_parent">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical">
 
-	<RelativeLayout
-		android:id="@+id/doc_wrapper"
-		android:layout_width="match_parent"
-		android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <Button
+            android:id="@+id/search_previous"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="Previous"/>
 
-		<net.egordmitriev.libmupdf.PDFView
-			android:id="@+id/doc_view_inner"
-			android:layout_width="match_parent"
-			android:layout_height="match_parent">
-		</net.egordmitriev.libmupdf.PDFView>
+        <EditText
+            android:id="@+id/search_input"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"/>
 
-	</RelativeLayout>
-</RelativeLayout>
+        <Button
+            android:id="@+id/search_next"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="Next"/>
+    </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/doc_wrapper"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <net.egordmitriev.libmupdf.PDFView
+            android:id="@+id/doc_view_inner"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+        </net.egordmitriev.libmupdf.PDFView>
+
+    </RelativeLayout>
+</LinearLayout>

@@ -6,6 +6,9 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.RelativeLayout;
 
 import com.artifex.mupdf.fitz.Document;
@@ -13,21 +16,24 @@ import com.artifex.mupdf.fitz.Document;
 import net.egordmitriev.libmupdf.PDFView;
 
 import java.io.File;
-import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+
+import static net.egordmitriev.mypdf.Utils.copyFile;
 
 public class MainActivity extends AppCompatActivity {
 	
 	private PDFView mDocView;
 	private Document mDoc;
 	
+	private EditText mSearch;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		
-		Uri pdf = openPDF();
+		Uri pdf = extractAsset("git-cs.pdf");
 		final String path = Uri.decode(pdf.getEncodedPath());
 		
 		mDocView = (PDFView) findViewById(R.id.doc_view_inner);
@@ -37,36 +43,43 @@ public class MainActivity extends AppCompatActivity {
 		mDoc = Document.openDocument(path);
 		mDocView.setDocument(mDoc);
 		
-	}
-	
-	private void copyFile(InputStream in, OutputStream out) throws IOException {
-		byte[] buffer = new byte[1024];
-		int read;
-		while ((read = in.read(buffer)) != -1) {
-			out.write(buffer, 0, read);
-		}
-	}
-	
-	public Uri openPDF() {
-		AssetManager assetManager = getAssets();
-		InputStream in = null;
-		OutputStream out = null;
+		mDocView.setSearchScrollPos(0.35f);
 		
-		File file = new File(getFilesDir(), "git-cs.pdf");
+		Button previous = (Button) findViewById(R.id.search_previous);
+		Button next = (Button) findViewById(R.id.search_next);
+		mSearch = (EditText) findViewById(R.id.search_input);
+		
+		next.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				mDocView.onSearchNext(mSearch.getText().toString());
+				//mDocView.setScale(2.0f);
+			}
+		});
+		
+		previous.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				mDocView.onSearchPrevious(mSearch.getText().toString());
+			}
+		});
+		
+	}
+	
+	public Uri extractAsset(String name) {
+		AssetManager assetManager = getAssets();
+		File file = new File(getFilesDir(), name);
 		try {
-			in = assetManager.open("git-cs.pdf");
-			out = openFileOutput(file.getName(), Context.MODE_PRIVATE);
-			
+			InputStream in = assetManager.open(name);
+			OutputStream out = openFileOutput(file.getName(), Context.MODE_PRIVATE);
 			copyFile(in, out);
 			in.close();
-			in = null;
 			out.flush();
 			out.close();
-			out = null;
 		} catch (Exception e) {
 			Log.e("tag", e.getMessage());
 		}
-		return Uri.parse("file://" + getFilesDir() + "/git-cs.pdf");
+		return Uri.parse("file://" + getFilesDir() + "/" + name);
 	}
 	
 	@Override

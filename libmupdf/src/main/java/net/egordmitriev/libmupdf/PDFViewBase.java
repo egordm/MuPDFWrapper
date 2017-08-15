@@ -409,8 +409,6 @@ public class PDFViewBase extends AdapterView<Adapter>
 		}
 	}
 	
-	
-	
 	public boolean onScale(ScaleGestureDetector detector) {
 		//  new scale factor
 		float previousScale = mScale;
@@ -575,7 +573,7 @@ public class PDFViewBase extends AdapterView<Adapter>
 		mBlockRect.setEmpty();
 		
 		int column = 0;
-		int childTop = 0;
+		int childTop = UNSCALED_GAP;
 		int childWidth, childHeight, childLeft, childRight, childBottom;
 		int rowh = 0;
 		
@@ -611,7 +609,7 @@ public class PDFViewBase extends AdapterView<Adapter>
 				mBlockRect.set(mChildRect);
 			else
 				mBlockRect.union(mChildRect);
-	
+			
 			if (mChildRect.intersect(mViewport) && i < numDocPages) {
 				//  visible, so include in layout
 				if (cv.getParent() == null)
@@ -677,7 +675,7 @@ public class PDFViewBase extends AdapterView<Adapter>
 		//  if we're scrolling by hand.
 		//  the end of a fling is a special case.
 		if (mTouching && mostVisibleChild >= 0) {
-			if(mObserver != null)
+			if (mObserver != null)
 				mObserver.setCurrentPDFPage(mostVisibleChild);
 		}
 	}
@@ -686,7 +684,7 @@ public class PDFViewBase extends AdapterView<Adapter>
 		//  a fling just ended.
 		//  tell the main view about a new current page
 		if (mostVisibleChild >= 0) {
-			if(mObserver != null)
+			if (mObserver != null)
 				mObserver.setCurrentPDFPage(mostVisibleChild);
 		}
 	}

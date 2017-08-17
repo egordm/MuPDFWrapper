@@ -13,7 +13,6 @@ import android.view.MotionEvent;
 import android.view.ScaleGestureDetector;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewTreeObserver;
 import android.view.WindowManager;
 import android.widget.Adapter;
 import android.widget.AdapterView;
@@ -187,16 +186,8 @@ public class PDFViewBase extends AdapterView<Adapter>
 	
 	public void setDocument(final Document doc) {
 		mStarted = false;
-		
-		final ViewTreeObserver vto = getViewTreeObserver();
-		vto.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
-			@Override
-			public void onGlobalLayout() {
-				if (!mStarted) {
-					start(doc);
-				}
-			}
-		});
+		start(doc);
+		requestLayout();
 	}
 	
 	protected void start(Document doc) {

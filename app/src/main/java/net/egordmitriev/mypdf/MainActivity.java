@@ -27,6 +27,7 @@ public class MainActivity extends AppCompatActivity {
 	private Document mDoc;
 	
 	private EditText mSearch;
+	private String mPath;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -34,14 +35,12 @@ public class MainActivity extends AppCompatActivity {
 		setContentView(R.layout.activity_main);
 		
 		Uri pdf = extractAsset("git-cs.pdf");
-		final String path = Uri.decode(pdf.getEncodedPath());
+		mPath = Uri.decode(pdf.getEncodedPath());
 		
 		mDocView = (PDFView) findViewById(R.id.doc_view_inner);
 		RelativeLayout layout = (RelativeLayout) findViewById(R.id.doc_wrapper);
 		mDocView.setupHandles(layout);
 		
-		mDoc = Document.openDocument(path);
-		mDocView.setDocument(mDoc);
 		
 		mDocView.setSearchScrollPos(0.35f);
 		
@@ -61,6 +60,15 @@ public class MainActivity extends AppCompatActivity {
 			@Override
 			public void onClick(View view) {
 				mDocView.onSearchPrevious(mSearch.getText().toString());
+			}
+		});
+		
+		Button load = (Button) findViewById(R.id.load);
+		load.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				mDoc = Document.openDocument(mPath);
+				mDocView.setDocument(mDoc);
 			}
 		});
 		

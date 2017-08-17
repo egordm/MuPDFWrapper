@@ -29,7 +29,8 @@
     <RelativeLayout
         android:id="@+id/doc_wrapper"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="0dp"
+        android:layout_weight="1">
 
         <net.egordmitriev.libmupdf.PDFView
             android:id="@+id/doc_view_inner"
@@ -38,4 +39,9 @@
         </net.egordmitriev.libmupdf.PDFView>
 
     </RelativeLayout>
+    <Button
+        android:id="@+id/load"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Load"/>
 </LinearLayout>

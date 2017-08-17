@@ -164,6 +164,7 @@ public class DocPageView extends View implements Callback
 	private void sizePage(int w, int h)
 	{
 		float pagew, pageh;
+		if(mPage == null) loadPage();
 		if (mPage != null)
 		{
 			//  page exists, use it's actual size

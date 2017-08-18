@@ -194,6 +194,7 @@ public class PDFViewBase extends AdapterView<Adapter>
 			public void onGlobalLayout() {
 				if (!mStarted) {
 					start(doc);
+					requestLayout();
 				}
 			}
 		});

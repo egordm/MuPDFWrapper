@@ -521,7 +521,7 @@ public class PDFView extends PDFViewBase implements DragHandleListener {
 	protected static final float SEARCH_SCALE = 1.8f;
 	
 	public void focusOnRect(int pageNum, com.artifex.mupdf.fitz.Rect box) {
-		setScale(SEARCH_SCALE);
+		if(getScale() < SEARCH_SCALE) setScale(SEARCH_SCALE);
 		scrollRectIntoView(pageNum, box);
 	}
 	

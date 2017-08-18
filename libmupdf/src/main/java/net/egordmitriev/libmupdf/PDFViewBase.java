@@ -7,12 +7,14 @@ import android.graphics.Rect;
 import android.os.Handler;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.util.SparseArray;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.ScaleGestureDetector;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
 import android.view.WindowManager;
 import android.widget.Adapter;
 import android.widget.AdapterView;
@@ -186,8 +188,15 @@ public class PDFViewBase extends AdapterView<Adapter>
 	
 	public void setDocument(final Document doc) {
 		mStarted = false;
-		start(doc);
-		requestLayout();
+		final ViewTreeObserver vto = getViewTreeObserver();
+		vto.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+			@Override
+			public void onGlobalLayout() {
+				if (!mStarted) {
+					start(doc);
+				}
+			}
+		});
 	}
 	
 	protected void start(Document doc) {
@@ -518,8 +527,11 @@ public class PDFViewBase extends AdapterView<Adapter>
 			return;
 		
 		//  not if there are no pages
-		if (getPageCount() == 0)
+		if (getPageCount() == 0) {
+			Log.d("HELLOWORLD", "Ai no pages");
 			return;
+		}
+			
 		
 		//  not if we've been finished
 		if (finished())

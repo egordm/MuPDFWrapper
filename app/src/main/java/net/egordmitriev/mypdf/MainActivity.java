@@ -23,6 +23,7 @@ import static net.egordmitriev.mypdf.Utils.copyFile;
 
 public class MainActivity extends AppCompatActivity {
 	
+	private RelativeLayout mDocWrapper;
 	private PDFView mDocView;
 	private Document mDoc;
 	
@@ -37,12 +38,9 @@ public class MainActivity extends AppCompatActivity {
 		Uri pdf = extractAsset("git-cs.pdf");
 		mPath = Uri.decode(pdf.getEncodedPath());
 		
-		mDocView = (PDFView) findViewById(R.id.doc_view_inner);
-		RelativeLayout layout = (RelativeLayout) findViewById(R.id.doc_wrapper);
-		mDocView.setupHandles(layout);
+		/*mDocView = (PDFView) findViewById(R.id.doc_view_inner);*/
+		mDocWrapper = (RelativeLayout) findViewById(R.id.doc_wrapper);
 		
-		
-		mDocView.setSearchScrollPos(0.35f);
 		
 		Button previous = (Button) findViewById(R.id.search_previous);
 		Button next = (Button) findViewById(R.id.search_next);
@@ -63,15 +61,26 @@ public class MainActivity extends AppCompatActivity {
 			}
 		});
 		
+		initDocument(mPath);
+		
 		Button load = (Button) findViewById(R.id.load);
 		load.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
-				mDoc = Document.openDocument(mPath);
-				mDocView.setDocument(mDoc);
+				initDocument(mPath);
 			}
 		});
+	}
+	
+	private void initDocument(String path) {
+		mDocView = new PDFView(this);
+		mDocView.setupHandles(mDocWrapper);
+		mDocView.setSearchScrollPos(0.35f);
 		
+		mDoc = Document.openDocument(path);
+		mDocView.setDocument(mDoc);
+		mDocWrapper.removeAllViews();
+		mDocWrapper.addView(mDocView);
 	}
 	
 	public Uri extractAsset(String name) {

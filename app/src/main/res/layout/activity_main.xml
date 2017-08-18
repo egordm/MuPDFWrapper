@@ -32,12 +32,10 @@
         android:layout_height="0dp"
         android:layout_weight="1">
 
-        <net.egordmitriev.libmupdf.PDFView
+        <ViewStub
             android:id="@+id/doc_view_inner"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
-        </net.egordmitriev.libmupdf.PDFView>
-
+            android:layout_height="match_parent"/>
     </RelativeLayout>
     <Button
         android:id="@+id/load"
